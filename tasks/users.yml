@@ -36,7 +36,7 @@
   ansible.posix.authorized_key:
     user: "{{ item.name }}"
     # Ignore errors if a user's public keys file does not exist
-    key: "{{ lookup('file', 'files/ssh_keys/{{ item.name }}', errors='ignore') }}"
+    key: "{{ lookup('file', 'files/authorized_keys/{{ item.name }}', errors='ignore') }}"
     exclusive: true # Keys removed should be removed from the server as well
     state: present
   loop: "{{ system_users }}"
