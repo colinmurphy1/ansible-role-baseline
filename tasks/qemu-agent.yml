@@ -1,0 +1,14 @@
+---
+
+# Install QEMU guest agent on KVM VMs
+
+- name: "QEMU guest agent install"
+  package:
+    name: "{{ system_qemu_agent_package }}"
+    state: "{{ system_install_packages_state }}"
+
+- name: "QEMU guest agent service"
+  service:
+    name: "{{ system_qemu_agent_service_name }}"
+    state: "{{ system_qemu_agent_service_state }}"
+    enabled: "{{ system_qemu_agent_service_enabled }}"

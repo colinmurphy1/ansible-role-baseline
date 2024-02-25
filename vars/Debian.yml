@@ -1,0 +1,4 @@
+---
+
+# Debian systems use the sudo group for sudo
+system_sudo_group: "sudo"

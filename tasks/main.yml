@@ -1,0 +1,25 @@
+---
+
+- name: Include vars
+  include_vars: "{{ ansible_os_family }}.yml"
+
+- name: Install packages
+  include_tasks: packages.yml
+
+- name: QEMU guest agent
+  include_tasks: qemu-agent.yml
+  when: 
+    - system_qemu_agent_install == true
+    - ansible_virtualization_type == "kvm"
+
+- name: Configure system locale and timezone
+  include_tasks: locale.yml
+
+- name: Copy /etc/skel
+  include_tasks: skel.yml
+
+- name: Add users and groups
+  include_tasks: users.yml
+
+- name: System hardening
+  include_tasks: hardening.yml

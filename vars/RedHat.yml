@@ -1,0 +1,4 @@
+---
+
+# Red Hat systems use the wheel group for sudo
+system_sudo_group: "wheel"

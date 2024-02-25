@@ -1,0 +1,7 @@
+galaxy_info:
+  author: Colin Murphy
+  description: Base system configuration
+  license: MIT
+  min_ansible_version: "2.5"
+  galaxy_tags: []
+dependencies: []

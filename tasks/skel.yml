@@ -1,0 +1,12 @@
+---
+
+# All files located in files/etc/skel/ will be copied to /etc/skel
+# These files are default configurations for user accounts on the system
+
+- name: "Populate /etc/skel/"
+  copy:
+    src: "{{ item }}"
+    dest: "/etc/skel/"
+  with_fileglob:
+    - "etc/skel/*"
+    - "etc/skel/.*"

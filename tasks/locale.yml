@@ -1,0 +1,17 @@
+---
+
+# Configure system locale and timezone
+
+# Relying on ansible_facts environment variables does not always work - this returns the ACTUAL current locale
+- name: "Get current locale from localectl"
+  shell: "localectl status | grep LANG= | cut -d '=' -f2"
+  register: current_locale
+  changed_when: false # This should never result in a state change
+
+- name: "Set locale to {{ system_locale }}"
+  shell: "localectl set-locale LANG={{ system_locale }}"
+  # Locale is lowercase for normalization, as for example en_us.utf-8 and en_US.UTF-8 are both valid locales
+  when: current_locale.stdout|lower != system_locale|lower
+
+- name: "Set timezone to {{ system_timezone }}"
+  timezone: "name={{ system_timezone }}"
