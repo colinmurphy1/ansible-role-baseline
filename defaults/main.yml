@@ -13,6 +13,7 @@ system_install_packages:
   - tmux
   - vim
   - ssl-cert # for snakeoil.pem
+  - rsync
 
 # Packages install state - should always be present
 system_install_packages_state: "present"
