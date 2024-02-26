@@ -24,14 +24,6 @@
     remove: "{{ system_user_delete_home }}"
   loop: "{{ system_users }}"
 
-# # Appends user to the group for sudo if sudo is enabled
-# - name: "Add users to sudo/wheel group"
-#   user:
-#     user: "{{ item.name }}"
-#     groups: "{% if item.sudo | default(false) %}{{ system_sudo_group }}{% endif %}"
-#     append: true
-#   loop: "{{ system_users }}"
-
 - name: "Add users ssh keys"
   ansible.posix.authorized_key:
     user: "{{ item.name }}"
