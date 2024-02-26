@@ -1,0 +1,14 @@
+---
+
+# Set hostname
+
+- name: "Set hostname"
+  hostname:
+    name: "{{ system_hostname }}"
+
+- name: "Update hosts file"
+  lineinfile:
+    dest: "/etc/hosts"
+    regexp: "^127.0.0.1"
+    line: "127.0.0.1 localhost {{ system_hostname }}"
+    backup: yes

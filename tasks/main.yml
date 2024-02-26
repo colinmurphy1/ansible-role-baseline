@@ -3,6 +3,12 @@
 - name: Include vars
   include_vars: "{{ ansible_os_family }}.yml"
 
+- name: Set hostname
+  include_tasks: hostname.yml
+  when:
+    - system_hostname is defined
+    - system_hostname|length > 0
+
 - name: Install packages
   include_tasks: packages.yml
 
