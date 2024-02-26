@@ -2,6 +2,24 @@
 
 # Set hostname
 
+- name: "Determine if cloud-init config file exists"
+  stat:
+    path: "/etc/cloud/cloud.cfg"
+  register: cloud_cfg
+
+- name: "Prevent cloud-init from changing hostname"
+  lineinfile:
+    dest: "/etc/cloud/cloud.cfg"
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    state: present
+  with_items:
+    - regexp: "update_hostname$"
+      line: "# - update_hostname"
+    - regexp: "update_etc_hosts$"
+      line: "# - update_etc_hosts"
+  when: cloud_cfg.stat.exists
+
 - name: "Set hostname"
   hostname:
     name: "{{ system_hostname }}"
