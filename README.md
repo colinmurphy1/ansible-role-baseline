@@ -20,10 +20,11 @@ None.
 * `system_install_packages`: List of packages to install. By default, some common utilities, such as bash, nano, htop, rsync, and vim will be installed.
 * `system_install_packages_state`: Install the mentioned packages
 
-### Timezone, locale
+### Timezone, locale, hostname
 
-* `system_timezone`: System timezone, using [tz database format](https://en.wikipedia.org/wiki/Tz_database)
-* `system_locale`: System locale
+* `system_hostname`: System hostname
+* `system_timezone`: System timezone, using [tz database format](https://en.wikipedia.org/wiki/Tz_database), example: `America/Chicago`
+* `system_locale`: System locale, example: `en_US.UTF-8`
 
 ### Guest agent
 
