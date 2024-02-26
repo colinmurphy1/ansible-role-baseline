@@ -27,6 +27,11 @@
 - name: "Update hosts file"
   lineinfile:
     dest: "/etc/hosts"
-    regexp: "^127.0.0.1"
-    line: "127.0.0.1 localhost {{ system_hostname }}"
-    backup: yes
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    state: present
+  with_items:
+    - regexp: "^127.0.0.1"
+      line: "127.0.0.1 localhost {{ system_hostname }}"
+    - regexp: "^127.0.1.1"
+      line: ""
