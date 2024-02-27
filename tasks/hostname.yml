@@ -32,6 +32,8 @@
     state: present
   with_items:
     - regexp: "^127.0.0.1"
-      line: "127.0.0.1 localhost {{ system_hostname }}"
+      line: "127.0.0.1 localhost"
+      # The IP 127.0.1.1 is generally used for the FQDN of the machine
+      # https://man.archlinux.org/man/hosts.5.en#EXAMPLES
     - regexp: "^127.0.1.1"
-      line: ""
+      line: "127.0.1.1 {{ system_hostname }}"
