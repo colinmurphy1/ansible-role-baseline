@@ -5,7 +5,7 @@
 - name: "QEMU guest agent install"
   package:
     name: "{{ system_qemu_agent_package }}"
-    state: "{{ system_install_packages_state }}"
+    state: "{{ system_packages_state }}"
 
 - name: "QEMU guest agent service"
   service:

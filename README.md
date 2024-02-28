@@ -17,8 +17,9 @@ None.
 
 ### Packages
 
-* `system_install_packages`: List of packages to install. By default, some common utilities, such as bash, nano, htop, rsync, and vim will be installed.
-* `system_install_packages_state`: Install the mentioned packages
+* `system_packages`: List of packages to install. By default, some common utilities, such as bash, nano, htop, rsync, and vim will be installed.
+* `system_packages_extra`: Extra packages to install on a per-host or per-group basis.
+* `system_packages_state`: Install the mentioned packages
 
 ### Timezone, locale, hostname
 

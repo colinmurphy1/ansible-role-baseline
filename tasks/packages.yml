@@ -3,6 +3,8 @@
 - name: "Install base packages"
   package:
     name: "{{ item }}"
-    state: "{{ system_install_packages_state }}"
+    state: "{{ system_packages_state }}"
     update_cache: true
-  loop: "{{ system_install_packages }}"
+  loop: 
+    - "{{ system_packages }}"
+    - "{{ system_packages_extra }}"

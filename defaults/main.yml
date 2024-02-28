@@ -5,7 +5,7 @@
 #
 
 # Packages to install
-system_install_packages:
+system_packages:
   - sudo
   - bash
   - nano
@@ -14,8 +14,11 @@ system_install_packages:
   - vim
   - rsync
 
+# Extra packages to install
+system_packages_extra: []
+
 # Packages install state - should always be present
-system_install_packages_state: "present"
+system_packages_state: "present"
 
 #
 # Timezone, locale
