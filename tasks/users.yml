@@ -9,6 +9,8 @@
     gid: "{{ item.gid | default(omit) }}"
     state: "{{ item.state | default(system_group_default_state) }}"
   loop: "{{ system_groups }}"
+  loop_control:
+    label: "{{ item.name }}"
 
 - name: "Add users"
   user:
@@ -23,6 +25,8 @@
     state: "{{ item.state | default(system_user_default_state) }}"
     remove: "{{ system_user_delete_home }}"
   loop: "{{ system_users }}"
+  loop_control:
+    label: "{{ item.name }}"
 
 - name: "Add users ssh keys"
   ansible.posix.authorized_key:
@@ -34,3 +38,5 @@
   loop: "{{ system_users }}"
   # To prevent an error, skip adding keys to users that are not present
   when: item.state|default(system_user_default_state) == "present"
+  loop_control:
+    label: "{{ item.name }}"
