@@ -21,7 +21,7 @@
     shell: "{{ item.shell | default(system_user_default_shell) }}"
     state: "{{ item.state | default(system_user_default_state) }}"
     system: "{{ item.system | default(false) }}"
-  when: item.ignore != true
+  when: item.ignore|default(false) != true
   loop: "{{ system_users + system_users_extra | list }}"
   loop_control:
     label: "{{ item.name }}"
