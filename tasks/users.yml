@@ -5,7 +5,6 @@
 - name: "Add groups"
   group:
     name: "{{ item.name }}"
-    # Let host determine gid if not specified (not recommended for idempotency)
     gid: "{{ item.gid | default(omit) }}"
     state: "{{ item.state | default(system_group_default_state) }}"
   loop: "{{ system_groups }}"
@@ -15,16 +14,15 @@
 - name: "Add users"
   user:
     name: "{{ item.name }}"
-    comment: "{{ item.comment }}"
+    comment: "{{ item.comment | default(omit) }}"
     groups: "{{ item.groups | default(omit) }}"
-    password: "{{ item.password_hash }}"
-    # Let host determine uid if not specified (not recommended for idempotency)
+    password: "{{ item.password_hash | default(omit) }}"
     uid: "{{ item.uid | default(omit) }}"
     shell: "{{ item.shell | default(system_user_default_shell) }}"
-    # If state is not defined, fall back to the default state (present, unless changed)
     state: "{{ item.state | default(system_user_default_state) }}"
-    remove: "{{ system_user_delete_home }}"
-  loop: "{{ system_users }}"
+    system: "{{ item.system | default(false) }}"
+  when: item.ignore != true
+  loop: "{{ system_users + system_users_extra | list }}"
   loop_control:
     label: "{{ item.name }}"
 
@@ -35,7 +33,7 @@
     key: "{{ lookup('file', 'files/authorized_keys/{{ item.name }}', errors='ignore') }}"
     exclusive: true # Keys removed should be removed from the server as well
     state: present
-  loop: "{{ system_users }}"
+  loop: "{{ system_users + system_users_extra | list }}"
   # To prevent an error, skip adding keys to users that are not present
   when: item.state|default(system_user_default_state) == "present"
   loop_control:

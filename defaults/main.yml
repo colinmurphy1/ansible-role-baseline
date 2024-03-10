@@ -47,6 +47,7 @@ system_qemu_agent_service_enabled: true
 
 # Users managed by this role
 system_users: []
+system_users_extra: [] # Extra users on a per-host or per-group basis
 # - name: User name
 #   uid: User ID number
 #   comment: Comment/GECOS field
@@ -57,15 +58,13 @@ system_users: []
 
 # Groups managed by this role
 system_groups: []
+system_groups_extra: []  # Extra groups on a per-host or per-group basis
 # - name: Group name
 #   gid: Group ID number
 #   state: Group state, defaults to system_group_default_state
 
 # Default state of users managed by Ansible
 system_user_default_state: "present"
-
-# Delete home directory for removed users
-system_user_delete_home: true
 
 # Default state of groups managed by Ansible
 system_group_default_state: "present"
