@@ -2,31 +2,42 @@
 
 # Configure users, groups, and ssh keys
 
-- name: "Add groups"
+- name: Add groups
   group:
     name: "{{ item.name }}"
     gid: "{{ item.gid | default(omit) }}"
     state: "{{ item.state | default(system_group_default_state) }}"
-  loop: "{{ system_groups }}"
+  loop: "{{ system_groups + system_groups_extra | list }}"
   loop_control:
     label: "{{ item.name }}"
 
-- name: "Add users"
+- name: Get all groups on system
+  getent:
+    database: group
+
+- name: Add users
   user:
     name: "{{ item.name }}"
     comment: "{{ item.comment | default(omit) }}"
-    groups: "{{ item.groups | default(omit) }}"
+    # Add user to groups on the system
+    groups: |
+      {%- set _groups = [] -%}
+      {%- for group in item.groups -%}
+        {%- if group in ansible_facts.getent_group -%}
+          {{- _groups.append(group) -}}
+        {%- endif -%}
+      {%- endfor -%}
+      {{ _groups | join(',') }}
     password: "{{ item.password_hash | default(omit) }}"
     uid: "{{ item.uid | default(omit) }}"
     shell: "{{ item.shell | default(system_user_default_shell) }}"
     state: "{{ item.state | default(system_user_default_state) }}"
     system: "{{ item.system | default(false) }}"
-  when: item.ignore|default(false) != true
   loop: "{{ system_users + system_users_extra | list }}"
   loop_control:
     label: "{{ item.name }}"
 
-- name: "Add users ssh keys"
+- name: Add users ssh keys
   ansible.posix.authorized_key:
     user: "{{ item.name }}"
     # Ignore errors if a user's public keys file does not exist
@@ -35,6 +46,8 @@
     state: present
   loop: "{{ system_users + system_users_extra | list }}"
   # To prevent an error, skip adding keys to users that are not present
-  when: item.state|default(system_user_default_state) == "present"
+  when:
+    - item.state|default(system_user_default_state) == "present"
+    - item.system|default(false) == false
   loop_control:
     label: "{{ item.name }}"
