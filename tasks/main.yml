@@ -16,7 +16,7 @@
   include_tasks: qemu-agent.yml
   when: 
     - system_qemu_agent_install == true
-    - ansible_virtualization_type == "kvm"
+    - ansible_system_vendor == "QEMU"
 
 - name: Configure system locale and timezone
   include_tasks: locale.yml
