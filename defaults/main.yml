@@ -13,6 +13,7 @@ system_packages:
   - tmux
   - vim
   - rsync
+  - cron
 
 # Extra packages to install
 system_packages_extra: []
