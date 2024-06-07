@@ -10,3 +10,11 @@
   with_fileglob:
     - "etc/skel/*"
     - "etc/skel/.*"
+
+- name: "Copy /etc/skel to root"
+  copy:
+    src: "{{ item }}"
+    dest: "/root/"
+  with_fileglob:
+    - "etc/skel/*"
+    - "etc/skel/.*"
