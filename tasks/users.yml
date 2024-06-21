@@ -19,6 +19,7 @@
   user:
     name: "{{ item.name }}"
     comment: "{{ item.comment | default(omit) }}"
+    group: "{{ item.name }}"
     # Add user to groups on the system
     groups: |
       {%- set _groups = [] -%}
