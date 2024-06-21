@@ -1,31 +1,31 @@
 ---
 
 - name: Include vars
-  include_vars: "{{ ansible_os_family }}.yml"
+  ansible.builtin.include_vars: "{{ ansible_os_family }}.yml"
 
 - name: Set hostname
-  include_tasks: hostname.yml
+  ansible.builtin.include_tasks: hostname.yml
   when:
     - system_hostname is defined
     - system_hostname|length > 0
 
 - name: Install packages
-  include_tasks: packages.yml
+  ansible.builtin.include_tasks: packages.yml
 
 - name: QEMU guest agent
-  include_tasks: qemu-agent.yml
-  when: 
-    - system_qemu_agent_install == true
+  ansible.builtin.include_tasks: qemu-agent.yml
+  when:
+    - system_qemu_agent_install
     - ansible_system_vendor == "QEMU"
 
 - name: Configure system locale and timezone
-  include_tasks: locale.yml
+  ansible.builtin.include_tasks: locale.yml
 
 - name: Copy /etc/skel
-  include_tasks: skel.yml
+  ansible.builtin.include_tasks: skel.yml
 
 - name: Add users and groups
-  include_tasks: users.yml
+  ansible.builtin.include_tasks: users.yml
 
 - name: System hardening
-  include_tasks: hardening.yml
+  ansible.builtin.include_tasks: hardening.yml

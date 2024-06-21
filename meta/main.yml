@@ -1,4 +1,6 @@
 galaxy_info:
+  role_name: baseline
+  namespace: cmurphy
   author: Colin Murphy
   description: Base system configuration
   license: MIT

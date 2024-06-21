@@ -1,10 +1,10 @@
 ---
 
 - name: "Install base packages"
-  package:
+  ansible.builtin.package:
     name: "{{ item }}"
     state: "{{ system_packages_state }}"
     update_cache: true
-  loop: 
+  loop:
     - "{{ system_packages }}"
     - "{{ system_packages_extra }}"

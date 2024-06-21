@@ -4,7 +4,7 @@
 # These files are default configurations for user accounts on the system
 
 - name: "Copy /etc/skel"
-  copy:
+  ansible.builtin.copy:
     src: "{{ item }}"
     dest: "/etc/skel/"
   with_fileglob:
@@ -12,7 +12,7 @@
     - "etc/skel/.*"
 
 - name: "Copy /etc/skel to root"
-  copy:
+  ansible.builtin.copy:
     src: "{{ item }}"
     dest: "/root/"
   with_fileglob:

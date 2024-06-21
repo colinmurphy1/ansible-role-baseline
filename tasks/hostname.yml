@@ -3,12 +3,12 @@
 # Set hostname
 
 - name: "Determine if cloud-init config file exists"
-  stat:
+  ansible.builtin.stat:
     path: "/etc/cloud/cloud.cfg"
   register: cloud_cfg
 
 - name: "Prevent cloud-init from changing hostname"
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: "/etc/cloud/cloud.cfg"
     regexp: "{{ item.regexp }}"
     line: "{{ item.line }}"
@@ -21,11 +21,11 @@
   when: cloud_cfg.stat.exists
 
 - name: "Set hostname"
-  hostname:
+  ansible.builtin.hostname:
     name: "{{ system_hostname }}"
 
 - name: "Update hosts file"
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: "/etc/hosts"
     regexp: "{{ item.regexp }}"
     line: "{{ item.line }}"
