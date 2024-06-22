@@ -19,7 +19,6 @@
   ansible.builtin.user:
     name: "{{ item.name }}"
     comment: "{{ item.comment | default(omit) }}"
-    group: "{{ item.name }}"
     # Add user to groups on the system
     groups: |
       {%- set _groups = [] -%}
@@ -50,6 +49,6 @@
   # To prevent an error, skip adding keys to users that are not present
   when:
     - item.state|default(system_user_default_state) == "present"
-    - ! item.system|default(false)
+    - not item.system|default(false)
   loop_control:
     label: "{{ item.name }}"
