@@ -29,7 +29,7 @@ system_packages_state: "present"
 
 # Default system timezone and locale
 system_timezone: "Etc/UTC"
-system_locale: "en_US.UTF-8"
+system_locales: ["en_US.UTF-8"]
 
 #
 # QEMU Guest Agent

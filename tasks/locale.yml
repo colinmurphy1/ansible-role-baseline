@@ -2,17 +2,14 @@
 
 # Configure system locale and timezone
 
-# Relying on ansible_facts environment variables does not always work - this returns the ACTUAL current locale
-- name: "Get current locale from localectl"
-  ansible.builtin.shell: "localectl status | grep LANG= | cut -d '=' -f2"
-  register: current_locale
-  changed_when: false # This should never result in a state change
+- name: "Set locale"
+  community.general.locale_gen:
+    name: "{{ system_locales }}"
+    state: present
+  when: ansible_os_family != "RedHat"
 
-- name: "Set locale to {{ system_locale }}"
-  ansible.builtin.shell: "localectl set-locale LANG={{ system_locale }}"
-  # Locale is lowercase for normalization, as for example en_us.utf-8 and en_US.UTF-8 are both valid locales
-  when: current_locale.stdout|lower != system_locale|lower
+# TODO: Implement locale configuration for RedHat-based systems
 
-- name: "Set timezone to {{ system_timezone }}"
+- name: "Set timezone"
   community.general.timezone:
     name: "{{ system_timezone }}"

@@ -1,3 +1,5 @@
+---
+
 galaxy_info:
   role_name: baseline
   namespace: cmurphy
@@ -5,5 +7,15 @@ galaxy_info:
   description: Base system configuration
   license: MIT
   min_ansible_version: "2.5"
-  galaxy_tags: []
+  platforms:
+    - name: Debian
+      version: all
+    - name: Ubuntu
+      version: all
+    - name: Alpine
+      version: all
+    - name: ArchLinux
+      version: all
+  galaxy_tags:
+    - baseline
 dependencies: []
