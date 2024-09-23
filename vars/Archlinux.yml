@@ -1,0 +1,4 @@
+---
+
+# Arch hosts use the wheel group
+system_sudo_group: "wheel"

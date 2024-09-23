@@ -1,0 +1,15 @@
+---
+
+# Arch Linux-specific configuration
+
+- name: Configure pacman
+  ansible.builtin.lineinfile:
+    dest: /etc/pacman.conf
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    state: present
+  loop:
+    - regexp: "^#Color"
+      line: "Color"
+    - regexp: "^#ParallelDownloads"
+      line: "ParallelDownloads = 5"
