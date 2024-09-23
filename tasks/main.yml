@@ -21,6 +21,10 @@
 - name: Configure system locale and timezone
   ansible.builtin.include_tasks: locale.yml
 
+- name: Arch Linux-specific configuration
+  ansible.builtin.include_tasks: arch.yml
+  when: ansible_os_family == "Archlinux"
+
 - name: Copy /etc/skel
   ansible.builtin.include_tasks: skel.yml
 

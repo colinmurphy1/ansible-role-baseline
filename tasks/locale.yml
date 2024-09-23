@@ -2,7 +2,7 @@
 
 # Configure system locale and timezone
 
-- name: "Set locale"
+- name: "Set locale (non-RedHat systems)"
   community.general.locale_gen:
     name: "{{ system_locales }}"
     state: present
