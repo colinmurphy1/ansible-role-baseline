@@ -7,6 +7,9 @@
   ansible.builtin.copy:
     src: "{{ item }}"
     dest: "/etc/skel/"
+    mode: '0644'
+    owner: root
+    group: root
   with_fileglob:
     - "etc/skel/*"
     - "etc/skel/.*"
@@ -15,6 +18,9 @@
   ansible.builtin.copy:
     src: "{{ item }}"
     dest: "/root/"
+    mode: '0644'
+    owner: root
+    group: root
   with_fileglob:
     - "etc/skel/*"
     - "etc/skel/.*"
