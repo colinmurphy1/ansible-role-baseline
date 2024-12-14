@@ -1,0 +1,16 @@
+---
+
+# All files located in files/etc/skel/ will be copied to /etc/skel
+# These files are default configurations for user accounts on the system
+
+- name: Install default configuration files
+  ansible.builtin.copy:
+    src: "etc/{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: '0644'
+    owner: root
+    group: root
+  loop:
+    - { src: "vimrc", dest: "/etc/vim/vimrc.local" }
+    - { src: "tmux.conf", dest: "/etc/tmux.conf" }
+    - { src: "zshrc", dest: "/etc/zsh/zshrc" }

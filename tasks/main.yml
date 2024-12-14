@@ -25,8 +25,8 @@
   ansible.builtin.include_tasks: arch.yml
   when: ansible_os_family == "Archlinux"
 
-- name: Copy /etc/skel
-  ansible.builtin.include_tasks: skel.yml
+- name: Copy default config files
+  ansible.builtin.include_tasks: default-configs.yml
 
 - name: Add users and groups
   ansible.builtin.include_tasks: users.yml

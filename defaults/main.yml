@@ -15,7 +15,9 @@ system_packages:
   - rsync
   - cron
   - dnsutils
+  - ldnsutils
   - sl
+  - zsh
 
 # Extra packages to install
 system_packages_extra: []
