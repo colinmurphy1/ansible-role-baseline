@@ -2,11 +2,11 @@
 
 # Configure system locale and timezone
 
-- name: "Set locale (non-RedHat systems)"
-  community.general.locale_gen:
-    name: "{{ system_locales }}"
-    state: present
-  when: ansible_os_family != "RedHat"
+# - name: "Set locale (non-RedHat systems)"
+#   community.general.locale_gen:
+#     name: "{{ system_locales }}"
+#     state: present
+#   when: ansible_os_family != "RedHat"
 
 # TODO: Implement locale configuration for RedHat-based systems
 
