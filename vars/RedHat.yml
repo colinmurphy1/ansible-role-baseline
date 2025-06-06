@@ -2,3 +2,24 @@
 
 # Red Hat systems use the wheel group for sudo
 system_sudo_group: "wheel"
+
+# Basic system packages to install with RedHat-specific package names
+system_packages:
+  - sudo
+  - bash
+  - nano
+  - htop
+  - tmux
+  - vim
+  - rsync
+  - cronie    # cron on Debian/Ubuntu
+  - dnsutils
+  - ldns      # ldnsutils on Debian/Ubuntu
+  - sl
+  - zsh
+
+
+# Configuration file locations
+
+system_zshrc_location: /etc/zshrc
+system_vimrc_location: /etc/vimrc

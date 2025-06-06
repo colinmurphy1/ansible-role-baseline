@@ -79,3 +79,11 @@ system_user_default_shell: "/bin/bash"
 
 # Default group for sudo
 system_sudo_group: "wheel"
+
+
+#
+# Configuration file locations
+#
+
+system_zshrc_location: /etc/zsh/zshrc
+system_vimrc_location: /etc/vim/vimrc.local

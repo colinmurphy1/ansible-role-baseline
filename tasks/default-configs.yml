@@ -11,6 +11,6 @@
     owner: root
     group: root
   loop:
-    - { src: "vimrc", dest: "/etc/vim/vimrc.local" }
+    - { src: "vimrc", dest: "{{ system_vimrc_location }}" }
     - { src: "tmux.conf", dest: "/etc/tmux.conf" }
-    - { src: "zshrc", dest: "/etc/zsh/zshrc" }
+    - { src: "zshrc", dest: "{{ system_zshrc_location }}" }
