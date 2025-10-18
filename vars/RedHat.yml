@@ -8,14 +8,14 @@ system_packages:
   - sudo
   - bash
   - nano
-  - htop
+#  - htop
   - tmux
   - vim
   - rsync
   - cronie    # cron on Debian/Ubuntu
   - dnsutils
   - ldns      # ldnsutils on Debian/Ubuntu
-  - sl
+#  - sl
   - zsh
 
 
