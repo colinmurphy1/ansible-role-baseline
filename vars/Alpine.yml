@@ -1,0 +1,16 @@
+---
+
+# Alpine Linux
+
+system_sudo_group: "wheel"
+
+system_packages:
+  - sudo
+  - bash
+  - nano
+  - htop
+  - tmux
+  - vim
+  - rsync
+  - ldns
+  - zsh
