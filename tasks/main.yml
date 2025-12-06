@@ -1,7 +1,7 @@
 ---
 
 - name: Include vars
-  ansible.builtin.include_vars: "{{ ansible_os_family }}.yml"
+  ansible.builtin.include_vars: "{{ ansible_facts.os_family }}.yml"
 
 - name: Install packages
   ansible.builtin.include_tasks: packages.yml
@@ -10,22 +10,22 @@
   ansible.builtin.include_tasks: qemu-agent.yml
   when:
     - system_qemu_agent_install
-    - ansible_system_vendor == "QEMU"
+    - ansible_facts["system_vendor"] == "QEMU"
 
 - name: Configure system locale and timezone
   ansible.builtin.include_tasks: locale.yml
 
 - name: Arch Linux-specific configuration
   ansible.builtin.include_tasks: arch.yml
-  when: ansible_os_family == "Archlinux"
+  when: ansible_facts["os_family"] == "Archlinux"
 
 - name: Alpine Linux-specific configuration
   ansible.builtin.include_tasks: alpine.yml
-  when: ansible_os_family == "Alpine"
+  when: ansible_facts["os_family"] == "Alpine"
 
 - name: Copy default config files
   ansible.builtin.include_tasks: default-configs.yml
-  when: ansible_os_family != "Alpine"
+  when: ansible_facts["os_family"] != "Alpine"
 
 - name: Add users and groups
   ansible.builtin.include_tasks: users.yml
